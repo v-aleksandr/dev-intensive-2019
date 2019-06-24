@@ -1,3 +1,5 @@
+#v_alex_68
+
 # Built application files
 build/
 
@@ -38,3 +40,21 @@ google-services.json
 
 # Version control
 vcs.xml
+# OS-specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Version control
+vcs.xml
+
+# lint
+lint/intermediates/
+lint/generated/
+lint/outputs/
+lint/tmp/
+lint/reports/
