@@ -3,10 +3,10 @@ package ru.skillbranch.devintensive.extensions
 import android.app.Activity
 import android.content.Context
 import android.graphics.Rect
+import android.util.TypedValue
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import androidx.core.content.ContextCompat.getSystemService
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlin.math.roundToInt
 
 
 fun Activity.hideKeyboard() {
@@ -17,15 +17,23 @@ fun Activity.hideKeyboard() {
     }
 }
 
+
+fun Activity.getRootView(): View {
+    return findViewById<View>(android.R.id.content)
+}
+
+fun Context.convertDpToPx(dp: Float): Float {
+    return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, this.resources.displayMetrics)
+}
+
 fun Activity.isKeyboardOpen(): Boolean {
-    return !this.isKeyboardClosed()
+    val bounds = Rect()
+    this.getRootView().getWindowVisibleDisplayFrame(bounds)
+    val heightDiff = getRootView().height - bounds.height()
+    val marginOfError = this.convertDpToPx(50F).roundToInt()
+    return heightDiff > marginOfError
 }
+
 fun Activity.isKeyboardClosed(): Boolean {
-    this.window.decorView.getWindowVisibleDisplayFrame(Rect())
-    return this.root_view.rootView.height - this.root_view.height <100
-}
-fun Activity.showSoftKeyboard(view: View) {
-    val inputMethodManager = view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-    view.requestFocus()
-    inputMethodManager.showSoftInput(view, 0)
+    return !this.isKeyboardOpen()
 }
