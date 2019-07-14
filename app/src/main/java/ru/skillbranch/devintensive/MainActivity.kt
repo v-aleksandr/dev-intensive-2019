@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             if (actionId == EditorInfo.IME_ACTION_DONE ||
                 event?.action == KeyEvent.ACTION_DOWN && event.keyCode == KeyEvent.KEYCODE_ENTER
             ) {
+                Log.d("M_MainActivity", if (isKeyboardOpen()) "Keyboard opened" else "Keyboard closed")
                 hideKeyboard()
                 iv_send.performClick()
                 true
@@ -55,7 +56,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         Log.d("M_MainActivity", "onCreate $status $question")
         benderImage.setColorFilter(Color.rgb(r, g, b), PorterDuff.Mode.MULTIPLY)
         textTxt.text = benderObj.askQuestion()
-//        Log.d("M_MainActivity", if (isKeyboardOpen()) "Keyboard opened" else "Keyboard closed")
+        Log.d("M_MainActivity", if (isKeyboardOpen()) "Keyboard opened" else "Keyboard closed")
     }
 
     override fun onStart() {

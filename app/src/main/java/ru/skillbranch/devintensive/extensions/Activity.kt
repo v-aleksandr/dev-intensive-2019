@@ -21,8 +21,8 @@ fun Activity.isKeyboardOpen(): Boolean {
     return !this.isKeyboardClosed()
 }
 fun Activity.isKeyboardClosed(): Boolean {
-    root_view.getWindowVisibleDisplayFrame(Rect())
-    return root_view.rootView.height - root_view.height <100
+    this.window.decorView.getWindowVisibleDisplayFrame(Rect())
+    return this.root_view.rootView.height - this.root_view.height <100
 }
 fun Activity.showSoftKeyboard(view: View) {
     val inputMethodManager = view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
