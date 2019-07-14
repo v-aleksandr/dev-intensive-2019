@@ -33,7 +33,7 @@ fun Date.humanizeDiff(date: Date = Date()): String {
         var result: String
         if (period > 26 * HOUR) {
             val res = period / DAY
-            result = res.toString() + " "
+            result = "$res "
             if (res % 100 in 11..20 || (res - 1) % 10 > 3) {
                 result += "дней"
             } else if (res % 10 == 1L) {
@@ -43,7 +43,7 @@ fun Date.humanizeDiff(date: Date = Date()): String {
             }
         } else if (period > 75 * MINUTE) {
             val res = period / HOUR
-            result = res.toString() + " "
+            result = "$res "
             if (res % 100 in 11..20 || (res - 1) % 10 > 3) {
                 result += "часов"
             } else if (res % 10 == 1L) {
@@ -53,7 +53,7 @@ fun Date.humanizeDiff(date: Date = Date()): String {
             }
         } else {
             val res = period / MINUTE
-            result = res.toString() + " "
+            result = "$res "
             if (res % 100 in 11..20 || (res - 1) % 10 > 3) {
                 result += "минут"
             } else if (res % 10 == 1L) {
