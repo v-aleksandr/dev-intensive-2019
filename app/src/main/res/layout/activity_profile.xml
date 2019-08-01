@@ -33,20 +33,21 @@
                     android:layout_marginRight="@dimen/spacing_huge_32"
                     android:layout_marginTop="@dimen/spacing_huge_32"/>
 
-            <ImageView
-            android:id="@+id/iv_avatar"
-            android:layout_width="@dimen/avatar_round_size"
-            android:layout_height="@dimen/avatar_round_size"
-            android:src="@drawable/avatar_default"
-            android:layout_centerHorizontal="true"/>
-            <!--<ru.skillbranch.devintensive.ui.custom.CircleImageView-->
-                    <!--android:id="@+id/iv_avatar"-->
-                    <!--android:layout_width="@dimen/avatar_round_size"-->
-                    <!--android:layout_height="@dimen/avatar_round_size"-->
-                    <!--android:src="@drawable/avatar_default"-->
-                    <!--android:layout_centerHorizontal="true"-->
-                    <!--app:cv_borderColor="@android:color/white"-->
-                    <!--app:cv_borderWidth="3dp"/>-->
+            <!--            <ImageView
+                    android:id="@+id/iv_avatar"
+                    android:layout_width="@dimen/avatar_round_size"
+                    android:layout_height="@dimen/avatar_round_size"
+                    android:src="@drawable/avatar_default"
+                    android:layout_centerHorizontal="true"/>-->
+            <ru.skillbranch.devintensive.ui.custom.CircleImageView
+                    android:id="@+id/iv_avatar"
+                    android:layout_width="@dimen/avatar_round_size"
+                    android:layout_height="@dimen/avatar_round_size"
+                    android:src="@drawable/avatar_default"
+                    android:layout_centerHorizontal="true"
+                    app:cv_borderColor="@android:color/holo_red_light"
+                    app:cv_borderWidth="10dp"
+            />
             <ImageButton
                     android:id="@+id/btn_edit"
                     android:layout_width="@dimen/btn_round_size_40"
