@@ -99,7 +99,7 @@ class CircleImageView @JvmOverloads constructor(
 
     fun setBorderWidth(dp: Float) {
         borderWidth = dp
-//        setBitmapPaint()
+//        setBitmapPaint() //only for scaling bitmap(does not work properly
         invalidate()
     }
 
