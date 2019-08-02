@@ -35,13 +35,13 @@ class CircleImageView @JvmOverloads constructor(
     private var bitmapPaint = Paint()
     private var borderPaint = Paint()
     private var bitmapRadius = 0f
-    private var borderColor  = DEFAULT_BORDER_COLOR
+    private var borderColor  = DEFAULT_BORDER_COLOR.toLong()
     private var borderWidth = DEFAULT_BORDER_WIDTH * scale
 
     init {
         if (attrs != null) {
             val a = context.obtainStyledAttributes(attrs, R.styleable.CircleImageView)
-            borderColor = a.getColor(R.styleable.CircleImageView_cv_borderColor, DEFAULT_BORDER_COLOR)
+            borderColor = a.getColor(R.styleable.CircleImageView_cv_borderColor, DEFAULT_BORDER_COLOR).toLong()
             borderWidth = a.getDimension(R.styleable.CircleImageView_cv_borderWidth, DEFAULT_BORDER_WIDTH * scale)
             a.recycle()
             setup()
@@ -84,7 +84,7 @@ class CircleImageView @JvmOverloads constructor(
             (2 * bitmapRadius).toInt(),
             Bitmap.Config.ARGB_8888
         )
-        bitmap.eraseColor(borderColor)
+        bitmap.eraseColor(borderColor.toInt())
         borderPaint.isAntiAlias = true
         borderPaint.shader = BitmapShader(bitmap, Shader.TileMode.REPEAT, Shader.TileMode.REPEAT)
     }
@@ -98,7 +98,7 @@ class CircleImageView @JvmOverloads constructor(
     @Dimension
     fun getBorderWidth(): Int = (borderWidth / scale).toInt()
 
-    fun getBorderColor(): Int = borderColor
+    fun getBorderColor(): Int = borderColor.toInt()
 
     fun setBorderWidth(@Dimension dp: Int) {
         borderWidth = dp * scale
@@ -107,13 +107,13 @@ class CircleImageView @JvmOverloads constructor(
     }
 
     fun setBorderColor(hex: String) {
-        borderColor = Color.parseColor(hex)
+        borderColor = Color.parseColor(hex).toLong()
         setBorderPaint()
         invalidate()
     }
 
     fun setBorderColor(@ColorRes colorId: Int) {
-        borderColor = colorId
+        borderColor = colorId.toLong()
         setBorderPaint()
         invalidate()
     }
