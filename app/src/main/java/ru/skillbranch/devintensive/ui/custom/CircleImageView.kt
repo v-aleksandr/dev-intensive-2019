@@ -25,21 +25,21 @@ class CircleImageView @JvmOverloads constructor(
 ) : ImageView(context, attrs, defStyleAttr) {
     companion object {
         private const val DEFAULT_BORDER_COLOR = Color.WHITE
-        private const val DEFAULT_BORDER_WIDTH = 5.25f
+        private const val DEFAULT_BORDER_WIDTH = 2
     }
 
+    private val scale = resources.displayMetrics.scaledDensity
     private var bitmapPaint = Paint()
     private var borderPaint = Paint()
     private var bitmapRadius = 0f
     private var borderColor = DEFAULT_BORDER_COLOR
-    private var borderWidth = DEFAULT_BORDER_WIDTH
-//    private val scale = resources.displayMetrics.scaledDensity
+    private var borderWidth = DEFAULT_BORDER_WIDTH * scale
 
     init {
         if (attrs != null) {
             val a = context.obtainStyledAttributes(attrs, R.styleable.CircleImageView)
             borderColor = a.getColor(R.styleable.CircleImageView_cv_borderColor, DEFAULT_BORDER_COLOR)
-            borderWidth = a.getDimension(R.styleable.CircleImageView_cv_borderWidth, DEFAULT_BORDER_WIDTH)
+            borderWidth = a.getDimension(R.styleable.CircleImageView_cv_borderWidth, DEFAULT_BORDER_WIDTH * scale)
             a.recycle()
             setup()
         }
@@ -93,12 +93,12 @@ class CircleImageView @JvmOverloads constructor(
     }
 
     @Dimension
-    fun getBorderWidth(): Float = borderWidth
+    fun getBorderWidth(): Int = (borderWidth / scale).toInt()
 
     fun getBorderColor(): Int = borderColor
 
-    fun setBorderWidth(dp: Float) {
-        borderWidth = dp
+    fun setBorderWidth(@Dimension dp: Int) {
+        borderWidth = dp * scale
 //        setBitmapPaint() //only for scaling bitmap(does not work properly
         invalidate()
     }
