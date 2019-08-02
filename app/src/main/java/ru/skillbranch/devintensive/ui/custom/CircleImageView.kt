@@ -1,5 +1,6 @@
 package ru.skillbranch.devintensive.ui.custom
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.ImageView
@@ -60,15 +61,7 @@ class CircleImageView @JvmOverloads constructor(
     }
 
     private fun setBitmapPaint() {
-        /*val paddingRect = Rect()
-        drawable.getPadding(paddingRect)*/
-        /*val bitmap = Bitmap.createScaledBitmap( //scaling after change border width
-            drawable.toBitmap(),
-            (2 * (bitmapRadius - borderWidth)).toInt(),
-            (2 * (bitmapRadius - borderWidth)).toInt(),
-            false
-        )*/
-        val bitmap = Bitmap.createScaledBitmap( // no scaling after change border width
+        val bitmap = Bitmap.createScaledBitmap(
             drawable.toBitmap(),
             (2 * bitmapRadius).toInt(),
             (2 * bitmapRadius).toInt(),
@@ -98,11 +91,19 @@ class CircleImageView @JvmOverloads constructor(
     @Dimension
     fun getBorderWidth(): Int = (borderWidth / scale).toInt()
 
+    @SuppressLint("ResourceType")
+    @ColorRes
     fun getBorderColor(): Int = borderColor
 
     fun setBorderWidth(@Dimension dp: Int) {
         borderWidth = dp * scale
-//        setBitmapPaint() //only for scaling bitmap(does not work properly
+        invalidate()
+    }
+
+
+    fun setBorderColor(@ColorRes colorId: Int) {
+        borderColor = context.getColor(colorId)
+        setBorderPaint()
         invalidate()
     }
 
@@ -111,11 +112,4 @@ class CircleImageView @JvmOverloads constructor(
         setBorderPaint()
         invalidate()
     }
-
-    fun setBorderColor(@ColorInt colorId: Int) {
-        borderColor = colorId
-        setBorderPaint()
-        invalidate()
-    }
-
 }
