@@ -16,6 +16,9 @@ import ru.skillbranch.devintensive.R
 import androidx.constraintlayout.solver.widgets.WidgetContainer.getBounds
 import android.graphics.drawable.Drawable
 import android.util.Log
+import androidx.annotation.ColorInt
+import androidx.core.content.res.ResourcesCompat.getColor
+import androidx.core.graphics.toColorLong
 
 
 class CircleImageView @JvmOverloads constructor(
@@ -95,6 +98,7 @@ class CircleImageView @JvmOverloads constructor(
     @Dimension
     fun getBorderWidth(): Int = (borderWidth / scale).toInt()
 
+    @ColorInt
     fun getBorderColor(): Int = borderColor
 
     fun setBorderWidth(@Dimension dp: Int) {
