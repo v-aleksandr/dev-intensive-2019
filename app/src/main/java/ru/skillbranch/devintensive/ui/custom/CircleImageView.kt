@@ -35,7 +35,7 @@ class CircleImageView @JvmOverloads constructor(
     private var bitmapPaint = Paint()
     private var borderPaint = Paint()
     private var bitmapRadius = 0f
-    private var borderColor = DEFAULT_BORDER_COLOR
+    private var borderColor  = DEFAULT_BORDER_COLOR
     private var borderWidth = DEFAULT_BORDER_WIDTH * scale
 
     init {
@@ -98,7 +98,6 @@ class CircleImageView @JvmOverloads constructor(
     @Dimension
     fun getBorderWidth(): Int = (borderWidth / scale).toInt()
 
-    @ColorInt
     fun getBorderColor(): Int = borderColor
 
     fun setBorderWidth(@Dimension dp: Int) {
