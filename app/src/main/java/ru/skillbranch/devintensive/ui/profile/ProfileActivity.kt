@@ -84,6 +84,7 @@ class ProfileActivity : AppCompatActivity() {
     private fun runShow(initials: String) {
         val ivAvatar = iv_avatar
         val initialsBitmap = createInitialsBitmap(initials)
+        ivAvatar.setImageBitmap(initialsBitmap)
         ivAvatar.setInitialsPaint(initialsBitmap)
         ivAvatar.showInitials()
     }
