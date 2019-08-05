@@ -1,5 +1,6 @@
 package ru.skillbranch.devintensive.ui.custom
 
+import android.R.attr.*
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
@@ -20,6 +21,8 @@ import android.util.Log
 import androidx.annotation.ColorInt
 import androidx.core.content.res.ResourcesCompat.getColor
 import androidx.core.graphics.toColorLong
+import android.R.color
+import android.content.res.Resources
 
 
 class CircleImageView @JvmOverloads constructor(
@@ -33,10 +36,12 @@ class CircleImageView @JvmOverloads constructor(
     }
 
     private val scale = resources.displayMetrics.scaledDensity
+    private var showInitials = false
+    private var initialsPaint = Paint()
     private var bitmapPaint = Paint()
     private var borderPaint = Paint()
     private var bitmapRadius = 0f
-    private var borderColor  = DEFAULT_BORDER_COLOR
+    private var borderColor = DEFAULT_BORDER_COLOR
     private var borderWidth = DEFAULT_BORDER_WIDTH * scale
 
     init {
@@ -51,7 +56,7 @@ class CircleImageView @JvmOverloads constructor(
 
     private fun setup() {
         viewTreeObserver.addOnGlobalLayoutListener {
-            bitmapRadius = measuredWidth.toFloat() / 2 // or ... = width or ... = this.layoutParams.width
+            bitmapRadius = layoutParams.width.toFloat() / 2 // or ... = width or ... = this.layoutParams.width
 
             setBitmapPaint()
             setBorderPaint()
@@ -82,10 +87,42 @@ class CircleImageView @JvmOverloads constructor(
         borderPaint.shader = BitmapShader(bitmap, Shader.TileMode.REPEAT, Shader.TileMode.REPEAT)
     }
 
+    public fun setInitialsPaint(bitmap: Bitmap) {
+        initialsPaint = Paint()
+        initialsPaint.isAntiAlias = true
+        initialsPaint.shader = BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP)
+    }
+
+    public fun clearInitialsPaint() {
+        initialsPaint = Paint()
+    }
+
+    public fun showInitials() {
+        showInitials = true
+        invalidate()
+    }
+
+    public fun hideInitials() {
+        showInitials = false
+        invalidate()
+    }
+
+    public fun toggleDraw() {
+        showInitials = !showInitials
+        invalidate()
+    }
 
     override fun onDraw(canvas: Canvas) {
+/*        // will be usefull for scaling image
+        val count = canvas.save()
+        canvas.translate(0f,0f)
+        canvas.restoreToCount(count)*/
         canvas.drawCircle(bitmapRadius, bitmapRadius, bitmapRadius, borderPaint)
-        canvas.drawCircle(bitmapRadius, bitmapRadius, bitmapRadius - borderWidth, bitmapPaint)
+        canvas.drawCircle(
+            bitmapRadius,
+            bitmapRadius,
+            bitmapRadius - borderWidth, if (showInitials) initialsPaint else bitmapPaint
+        )
     }
 
     @Dimension

@@ -37,8 +37,8 @@ object Utils {
            'ё' -> "e"
            'ж' -> "zh"
            'з' -> "z"
-           'и' -> "i"
-           'й' -> "i"
+           'и', 'й', 'і' -> "i"
+           'ї' -> "yi"
            'к' -> "k"
            'л' -> "l"
            'м' -> "m"
@@ -55,10 +55,10 @@ object Utils {
            'ч' -> "ch"
            'ш' -> "sh"
            'щ' -> "sh'"
-           'ъ' -> ""
-           'ы' -> "i"
-           'ь' -> ""
+           'ъ','ь' -> ""
+           'ы' -> "y"
            'э' -> "e"
+           'є' -> "ye"
            'ю' -> "yu"
            'я' -> "ya"
             else -> null
@@ -73,8 +73,7 @@ object Utils {
     }
 
     fun toInitials(firstName: String?, lastName: String?): String? {
-        val initials: String = getInitial(firstName) + getInitial(lastName)
-        return when (initials) {
+        return when (val initials: String = getInitial(firstName) + getInitial(lastName)) {
             "" -> null
             else -> initials
         }

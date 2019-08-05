@@ -24,7 +24,7 @@ object PreferencesRepository {
         putValue(APP_THEME to theme)
     }
 
-    fun getAppTheme() : Int = prefs.getInt(APP_THEME,AppCompatDelegate.MODE_NIGHT_NO)
+    fun getAppTheme(): Int = prefs.getInt(APP_THEME, AppCompatDelegate.MODE_NIGHT_NO)
 
     fun getProfile(): Profile = Profile(
         prefs.getString(FIRST_NAME, "")!!,
@@ -48,8 +48,7 @@ object PreferencesRepository {
 
     private fun putValue(pair: Pair<String, Any>) = with(prefs.edit()) {
         val key = pair.first
-        val value = pair.second
-        when (value) {
+        when (val value = pair.second) {
             is String -> putString(key, value)
             is Int -> putInt(key, value)
             is Long -> putLong(key, value)
