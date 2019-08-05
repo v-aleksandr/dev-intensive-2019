@@ -2,6 +2,8 @@ package ru.skillbranch.devintensive.ui.profile
 
 import android.graphics.*
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.util.TypedValue
 import android.view.View
@@ -144,6 +146,21 @@ class ProfileActivity : AppCompatActivity() {
         btn_switch_theme.setOnClickListener {
             viewModel.switchTheme()
         }
+        et_repository.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if (!isValidRepository(p0.toString())) {
+                    wr_repository.error = "Невалидный адрес репозитория"
+                } else {
+                    wr_repository.error = ""
+                }
+            }
+        })
     }
 
     private fun showCurrentMode(isEdit: Boolean) {
@@ -200,7 +217,7 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
-    private fun isValidRepository(repositoryString: String): Boolean {
+    public fun isValidRepository(repositoryString: String): Boolean {
         if (repositoryString.isNotEmpty()) {
             var arr = repositoryString.split(" ")
             var repString = arr[0]
